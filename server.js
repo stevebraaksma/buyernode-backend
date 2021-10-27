@@ -31,11 +31,35 @@ const TaskSchema = new mongoose.Schema({
 
 const Task = mongoose.model('Task', TaskSchema);
 
+// Middleware
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+
+
 // ROUTES
 // test route
 app.get('/', (req, res) => {
     res.send('hello');
-})
+});
+
+// index route
+app.get('/tasks', async (req, res) => {
+    try {
+        res.json(await Task.find({}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+// create route
+app.post('/tasks', async (req, res) => {
+    try {
+        res.json(await Task.create(req.body));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
 
 
