@@ -61,6 +61,26 @@ app.post('/tasks', async (req, res) => {
     }
 });
 
+// delete route
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        res.json(await Task.findByIdAndDelete(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+// update route
+app.put('/tasks/:id', async (req, res) => {
+    try {
+        res.json(
+            await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        );
+    } catch (error) {
+        res.status(400).json(error);
+    }
+})
+
 
 
 
