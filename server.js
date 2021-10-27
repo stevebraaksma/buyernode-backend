@@ -5,6 +5,9 @@ const { PORT = 3001, DATABASE_URL } = process.env;
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
+const morgan = require('morgan');
+
 
 
 mongoose.connect(DATABASE_URL);
@@ -15,6 +18,18 @@ mongoose.connection
 
 
 
+//////////////  MODELS
+const TaskSchema = new mongoose.Schema({
+    salesOrder: String,
+    customer: String,
+    assemblyNumber: String,
+    assemblyQty: String,
+    userWorking: String,
+    notes: String,
+    completedDate: Date,
+}, { timestamps: true });
+
+const Task = mongoose.model('Task', TaskSchema);
 
 // ROUTES
 // test route
