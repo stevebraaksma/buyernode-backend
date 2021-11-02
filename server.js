@@ -27,6 +27,7 @@ const TaskSchema = new mongoose.Schema({
     userWorking: String,
     notes: String,
     completedDate: Date,
+    status: String,
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', TaskSchema);
